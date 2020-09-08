@@ -35,6 +35,22 @@ public class unit1project{
     if(finaltemp > initialtemp)
         endothermic = true;
 
+    double heatenergy = 0;
+    if(initialphase.equals("solid")){
+        heatenergy += tempchangesolid(mass, initialtemp, finaltemp, finalphase, endothermic);
+    }
+    if(!initialphase.equals("solid")){
+       heatenergy += fusion(mass, endothermic);
+       heatenergy += tempchangeliquid(mass, 0, finaltemp, finalphase, endothermic);
+    }   
+    if(finalphase.equals("vapor")){
+        heatenergy += vaporization(mass, endothermic);
+        heatenergy += tempchangevapor(mass, 100, finaltemp, finalphase, endothermic)
+    }
+        
+    System.out.println("Total heat energy: " + heatenergy + " kj");
+
+
     }
 public static double tempchangesolid(double mass, double starttemp, double endtemp, String endphase, boolean endothermic){
     if(!endphase.equals("solid"))
